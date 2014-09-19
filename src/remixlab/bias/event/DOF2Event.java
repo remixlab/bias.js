@@ -88,7 +88,6 @@ public class DOF2Event extends MotionEvent {
 		super();
 		this.x = x;
 		this.y = y;
-		this.button = B_NOBUTTON;
 	}
 
 	/**
@@ -102,33 +101,22 @@ public class DOF2Event extends MotionEvent {
 		super();
 		this.x = x;
 		this.y = y;
-		this.button = B_NOBUTTON;
 		setPreviousEvent(prevEvent);
 	}
 
 	protected DOF2Event(DOF2Event other) {
 		super(other);
-		this.x = new Float(other.x);
-		this.dx = new Float(other.dx);
-		this.y = new Float(other.y);
-		this.dy = new Float(other.dy);
+		this.x = other.x;
+		this.dx = other.dx;
+		this.y = other.y;
+		this.dy = other.dy;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see remixlab.bias.event.MotionEvent#get()
-	 */
 	@Override
 	public DOF2Event get() {
 		return new DOF2Event(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see remixlab.bias.event.MotionEvent#setPreviousEvent(remixlab.bias.event.MotionEvent)
-	 */
 	@Override
 	public void setPreviousEvent(MotionEvent prevEvent) {
 		if (prevEvent != null)
@@ -193,11 +181,6 @@ public class DOF2Event extends MotionEvent {
 		return y() - dy();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see remixlab.bias.event.MotionEvent#modulate(float[])
-	 */
 	@Override
 	public void modulate(float[] sens) {
 		if (sens != null)
@@ -207,11 +190,6 @@ public class DOF2Event extends MotionEvent {
 			}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see remixlab.bias.event.BogusEvent#isNull()
-	 */
 	@Override
 	public boolean isNull() {
 		if (isRelative() && Util.zero(dx()) && Util.zero(dy()))
@@ -254,7 +232,7 @@ public class DOF2Event extends MotionEvent {
 				e1 = new DOF1Event(y(), modifiers(), button());
 			}
 		}
-		e1.timestamp = this.timestamp();
+		e1.modifiedTimestamp(this.timestamp());
 		e1.delay = this.delay();
 		e1.speed = this.speed();
 		e1.distance = this.distance();

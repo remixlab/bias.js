@@ -253,10 +253,12 @@ public interface PConstants {
   static final int GROUP           = 0;   // createShape()
 
   static final int POINT           = 2;   // primitive
-  static final int POINTS          = 3;   // vertices
+  static final int POINTS          = 2;   // Processing JS
+  //static final int POINTS          = 3;   // vertices
 
   static final int LINE            = 4;   // primitive
-  static final int LINES           = 5;   // beginShape(), createShape()
+  static final int LINES           = 4;   //Processing JS
+  //static final int LINES           = 5;   // beginShape(), createShape()
   static final int LINE_STRIP      = 50;  // beginShape()
   static final int LINE_LOOP       = 51;
 
@@ -266,7 +268,8 @@ public interface PConstants {
   static final int TRIANGLE_FAN    = 11;  // vertices
 
   static final int QUAD            = 16;  // primitive
-  static final int QUADS           = 17;  // vertices
+  static final int QUADS           = 16;  // Processing JS
+  //static final int QUADS           = 17;  // vertices
   static final int QUAD_STRIP      = 18;  // vertices
 
   static final int POLYGON         = 20;  // in the end, probably cannot
@@ -407,15 +410,15 @@ public interface PConstants {
   static final int CODED     = 0xffff;
 
   // key will be CODED and keyCode will be this value
-//  static final int UP        = KeyEvent.VK_UP;
-//  static final int DOWN      = KeyEvent.VK_DOWN;
-//  static final int LEFT      = KeyEvent.VK_LEFT;
-//  static final int RIGHT     = KeyEvent.VK_RIGHT;
+  static final int UP        = 0x26;
+  static final int DOWN      = 0x28;
+  static final int LEFT      = 0x25;
+  static final int RIGHT     = 0x27;
 //
 //  // key will be CODED and keyCode will be this value
-//  static final int ALT       = KeyEvent.VK_ALT;
-//  static final int CONTROL   = KeyEvent.VK_CONTROL;
-//  static final int SHIFT     = KeyEvent.VK_SHIFT;
+  static final int ALT       = 0x12;
+  static final int CONTROL   = 0x11;
+  static final int SHIFT     = 0x10;
 
 
   // orientations (only used on Android, ignored on desktop)

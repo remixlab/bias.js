@@ -10,33 +10,42 @@
 
 package remixlab.bias.core;
 
-import java.util.LinkedList;
-
-import remixlab.bias.event.BogusEvent;
-
 /**
- * [{@link remixlab.bias.event.BogusEvent},{@link remixlab.bias.core.Grabbable}] tuples which encapsulate message
- * passing from {@link remixlab.bias.event.BogusEvent} to {@link remixlab.bias.core.Grabbable} to perform actions.
+ * [{@link remixlab.bias.core.BogusEvent},{@link remixlab.bias.core.Grabber}] tuples which encapsulate message passing
+ * from {@link remixlab.bias.core.BogusEvent} to {@link remixlab.bias.core.Grabber} to perform actions.
  */
 public class EventGrabberTuple {
 	protected BogusEvent	event;
-	protected Grabbable		grabber;
+	protected Grabber			grabber;
 
 	/**
-	 * Constructs <{@link remixlab.bias.event.BogusEvent},{@link remixlab.bias.core.Grabbable}> tuple
+	 * Constructs <{@link remixlab.bias.core.BogusEvent},{@link remixlab.bias.core.Grabber}> tuple
 	 * 
 	 * @param e
-	 *          event
+	 *          {@link remixlab.bias.core.BogusEvent}
 	 * @param g
-	 *          grabber
+	 *          {@link remixlab.bias.core.Grabber}
 	 */
-	public EventGrabberTuple(BogusEvent e, Grabbable g) {
+	public EventGrabberTuple(BogusEvent e, Grabber g) {
 		event = e;
 		grabber = g;
 	}
 
 	/**
-	 * Calls {@link remixlab.bias.core.Grabbable#performInteraction(BogusEvent)}.
+	 * @param e
+	 *          {@link remixlab.bias.core.BogusEvent}
+	 * @param a
+	 *          {@link remixlab.bias.core.Action}
+	 * @param g
+	 *          {@link remixlab.bias.core.Grabber}
+	 */
+	public EventGrabberTuple(BogusEvent e, Action<?> a, Grabber g) {
+		this(e, g);
+		event.setAction(a);
+	}
+
+	/**
+	 * Calls {@link remixlab.bias.core.Grabber#performInteraction(BogusEvent)}.
 	 * 
 	 * @return true if succeeded and false otherwise.
 	 */
@@ -58,18 +67,14 @@ public class EventGrabberTuple {
 	/**
 	 * Returns the object Grabber in the tuple.
 	 */
-	public Grabbable grabber() {
+	public Grabber grabber() {
 		return grabber;
 	}
 
 	/**
-	 * Enqueues the tuple for later execution.
+	 * Returns the events action.
 	 */
-	public boolean enqueue(LinkedList<EventGrabberTuple> queue) {
-		if (!event().isNull()) {
-			queue.add(this);
-			return true;
-		}
-		return false;
+	public Action<?> action() {
+		return event.action();
 	}
 }

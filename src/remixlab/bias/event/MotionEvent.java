@@ -10,21 +10,23 @@
 
 package remixlab.bias.event;
 
+import remixlab.bias.core.BogusEvent;
 import remixlab.bias.event.shortcut.*;
 import remixlab.util.EqualsBuilder;
 import remixlab.util.HashCodeBuilder;
 
 /**
- * Base class of all DOF_n_Events: {@link remixlab.bias.event.BogusEvent}s defined from DOFs (degrees-of-freedom).
+ * Base class of all DOF_n_Events: {@link remixlab.bias.core.BogusEvent}s defined from DOFs (degrees-of-freedom).
  * <p>
  * A MotionEvent encapsulates a {@link remixlab.bias.event.shortcut.ButtonShortcut}. MotionEvents may be relative or
  * absolute (see {@link #isRelative()}, {@link #isAbsolute()}) depending whether or not they're defined from a previous
  * MotionEvent (see {@link #setPreviousEvent(MotionEvent)}). While relative motion events have {@link #distance()},
  * {@link #speed()}, and {@link #delay()}, absolute motion events don't.
- * 
- * @author pierre
  */
 public class MotionEvent extends BogusEvent {
+	// some motion actions may be performed without any button, e.g., mouse move (instead of drag).
+	public static final int	NOBUTTON	= 0;
+
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder(17, 37).appendSuper(super.hashCode())
@@ -67,7 +69,7 @@ public class MotionEvent extends BogusEvent {
 	 */
 	public MotionEvent() {
 		super();
-		this.button = B_NOBUTTON;
+		this.button = NOBUTTON;
 	}
 
 	/**
@@ -76,7 +78,7 @@ public class MotionEvent extends BogusEvent {
 	 */
 	public MotionEvent(int modifiers) {
 		super(modifiers);
-		this.button = B_NOBUTTON;
+		this.button = NOBUTTON;
 	}
 
 	/**
@@ -90,41 +92,31 @@ public class MotionEvent extends BogusEvent {
 
 	protected MotionEvent(MotionEvent other) {
 		super(other);
-		this.button = new Integer(other.button);
+		this.button = other.button;
 		this.delay = other.delay;
 		this.distance = other.distance;
 		this.speed = other.speed;
 		this.rel = other.rel;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see remixlab.bias.event.BogusEvent#get()
-	 */
 	@Override
 	public MotionEvent get() {
 		return new MotionEvent(this);
 	}
 
-	/*
+	/**
 	 * Modulate the event dofs according to {@code sens}.
 	 */
 	public void modulate(float[] sens) {
 	}
 
-	/*
+	/**
 	 * Returns the button defining the event's {@link remixlab.bias.event.shortcut.ButtonShortcut}.
 	 */
 	public int button() {
 		return button;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see remixlab.bias.event.BogusEvent#shortcut()
-	 */
 	@Override
 	public ButtonShortcut shortcut() {
 		return new ButtonShortcut(modifiers(), button());

@@ -129,7 +129,6 @@ public class DOF6Event extends MotionEvent {
 		this.rx = rx;
 		this.ry = ry;
 		this.rz = rz;
-		this.button = B_NOBUTTON;
 	}
 
 	/**
@@ -151,41 +150,30 @@ public class DOF6Event extends MotionEvent {
 		this.rx = rx;
 		this.ry = ry;
 		this.rz = rz;
-		this.button = B_NOBUTTON;
 		setPreviousEvent(prevEvent);
 	}
 
 	protected DOF6Event(DOF6Event other) {
 		super(other);
-		this.x = new Float(other.x);
-		this.dx = new Float(other.dx);
-		this.y = new Float(other.y);
-		this.dy = new Float(other.dy);
-		this.z = new Float(other.z);
-		this.dz = new Float(other.z);
-		this.rx = new Float(other.rx);
-		this.drx = new Float(other.drx);
-		this.ry = new Float(other.ry);
-		this.dry = new Float(other.dry);
-		this.rz = new Float(other.rz);
-		this.drz = new Float(other.drz);
+		this.x = other.x;
+		this.dx = other.dx;
+		this.y = other.y;
+		this.dy = other.dy;
+		this.z = other.z;
+		this.dz = other.z;
+		this.rx = other.rx;
+		this.drx = other.drx;
+		this.ry = other.ry;
+		this.dry = other.dry;
+		this.rz = other.rz;
+		this.drz = other.drz;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see remixlab.bias.event.MotionEvent#get()
-	 */
 	@Override
 	public DOF6Event get() {
 		return new DOF6Event(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see remixlab.bias.event.MotionEvent#setPreviousEvent(remixlab.bias.event.MotionEvent)
-	 */
 	@Override
 	public void setPreviousEvent(MotionEvent prevEvent) {
 		super.setPreviousEvent(prevEvent);
@@ -371,11 +359,6 @@ public class DOF6Event extends MotionEvent {
 		return rz() - drz();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see remixlab.bias.event.MotionEvent#modulate(float[])
-	 */
 	@Override
 	public void modulate(float[] sens) {
 		if (sens != null)
@@ -389,11 +372,6 @@ public class DOF6Event extends MotionEvent {
 			}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see remixlab.bias.event.BogusEvent#isNull()
-	 */
 	@Override
 	public boolean isNull() {
 		if (isRelative() && Util.zero(dx()) && Util.zero(dy())
@@ -441,7 +419,7 @@ public class DOF6Event extends MotionEvent {
 				e3 = new DOF3Event(rx(), ry(), rz(), modifiers(), button());
 			}
 		}
-		e3.timestamp = this.timestamp();
+		e3.modifiedTimestamp(this.timestamp());
 		e3.delay = this.delay();
 		e3.speed = this.speed();
 		e3.distance = this.distance();

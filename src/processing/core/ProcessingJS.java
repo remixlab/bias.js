@@ -93,7 +93,10 @@ public class ProcessingJS implements PConstants{
 		
 		
 		public PMatrix3D projmodelview() {
-			throw new UnsupportedOperationException("projmodelview.");
+			PMatrix3D retValue = new PMatrix3D();
+			retValue.set(projection());
+			retValue.apply(modelview());
+			return retValue;
 		}
 		
 		
@@ -111,11 +114,11 @@ public class ProcessingJS implements PConstants{
 		
 			var gl = this.@processing.core.ProcessingJS::gl;
 			//alert(gl);
-			console.debug(gl);	
+			//console.debug(gl);	
 			//console.log(gl);	
 			var pM = gl.getProjectionMatrix();
 			
-			console.debug(gl);	
+			//console.debug(gl);	
 			
 			return @processing.core.JsUtils::JavaScriptArray2Matrix3D(Lcom/google/gwt/core/client/JavaScriptObject;)(pM);
 					
@@ -191,6 +194,7 @@ public class ProcessingJS implements PConstants{
 		console.log(message);
 
 		}-*/;
+		
 		
 		
 		  public native final float random(float high) /*-{
@@ -280,12 +284,14 @@ public class ProcessingJS implements PConstants{
 		
 		public native int mouseX() /*-{
 			var gl = this.@processing.core.ProcessingJS::gl;
+		//	console.log(gl.mouseX);
 			return gl.mouseX;	
 			
 		}-*/;	
 		
 		public native int mouseY() /*-{
 			var gl = this.@processing.core.ProcessingJS::gl;	
+	//		console.log(gl.mouseY);
 			return gl.mouseY;
 		}-*/;
 
@@ -305,11 +311,6 @@ public class ProcessingJS implements PConstants{
 		
 		}-*/;
 
-		public native void pushMatrix() /*-{
-			var gl = this.@processing.core.ProcessingJS::gl;
-			gl. pushMatrix();	
-		
-		}-*/;
 
 		public native void translate(float f, float g) /*-{
 			var gl = this.@processing.core.ProcessingJS::gl;
@@ -329,11 +330,7 @@ public class ProcessingJS implements PConstants{
 		
 		}-*/;
 
-		public native void popMatrix() /*-{
-			var gl = this.@processing.core.ProcessingJS::gl;
-			gl.popMatrix();	
-		
-		}-*/;
+
 
 		public native char key() /*-{
 			var gl = this.@processing.core.ProcessingJS::gl;
@@ -343,6 +340,7 @@ public class ProcessingJS implements PConstants{
 		
 		public native void translate(float x, float y, float z) /*-{
 			var gl = this.@processing.core.ProcessingJS::gl;
+			//console.log("translate");
 			gl.translate( x,  y,  z) ;	
 		
 		}-*/;	
@@ -460,44 +458,7 @@ public class ProcessingJS implements PConstants{
 					}-*/;
 					 
 					 
-					 public  native void resetMatrix() /*-{
-						var gl = this.@processing.core.ProcessingJS::gl;
-						gl.resetMatrix();	
-					
-					}-*/;
 
-					 
-					 public    PMatrix getMatrix() {
-						return getModelViewMatrix();	
-					
-					}
-
-					 
-					 public  native void printMatrix() /*-{
-					 	console.log("printMatrix: no implementado");
-					 	
-						//var gl = this.@processing.core.Processing::gl;
-						//gl.vertex( x,  y,  z);	
-					
-					}-*/;
-					 
-					 public  native void applyMatrix(PMatrix source) /*-{
-						var gl = this.@processing.core.ProcessingJS::gl;
-						gl.applyMatrix( source);	
-					
-					}-*/;
-					 
-					 public  native void applyMatrix(float n00, float n01, float n02, float n03,
-	                          float n10, float n11, float n12, float n13,
-	                          float n20, float n21, float n22, float n23,
-	                          float n30, float n31, float n32, float n33) /*-{
-						var gl = this.@processing.core.ProcessingJS::gl;
-						gl.applyMatrix( n00,  n01,  n02,  n03,
-	                           n10,  n11,  n12,  n13,
-	                           n20,  n21,  n22,  n23,
-	                           n30,  n31,  n32,  n33) ;	
-					
-					}-*/;
 					 
 					 public  native void rotate(float angle) /*-{
 						var gl = this.@processing.core.ProcessingJS::gl;
@@ -543,6 +504,14 @@ public class ProcessingJS implements PConstants{
 						gl.fill( i,  j,  k);	
 					
 					}-*/;
+						
+						
+						public  native void fill(int i, int j, int k, int l) /*-{
+						var gl = this.@processing.core.ProcessingJS::gl;
+						gl.fill( i,  j,  k , l);	
+					
+					}-*/;
+						
 						public  native Object createFont(String string, int i) /*-{
 						var gl = this.@processing.core.ProcessingJS::gl;
 						gl.createFont( string,  i);	
@@ -555,7 +524,52 @@ public class ProcessingJS implements PConstants{
 						gl.text( info,  i,  j,  k,  l);	
 					
 					}-*/;
+						
+						/*
+						 * 
+						 * MATRIX
+						 * 
+						 * */
 
+						
+						 public  native void resetMatrix() /*-{
+							var gl = this.@processing.core.ProcessingJS::gl;
+							gl.resetMatrix();	
+						
+						}-*/;
+
+						 
+						 public    PMatrix getMatrix() {
+							return getModelViewMatrix();	
+						
+						}
+
+						 
+						 public  native void printMatrix() /*-{
+						 	console.log("printMatrix: no implementado");
+						 	
+							//var gl = this.@processing.core.Processing::gl;
+							//gl.vertex( x,  y,  z);	
+						
+						}-*/;
+						 
+						 public  native void applyMatrix(PMatrix source) /*-{
+							var gl = this.@processing.core.ProcessingJS::gl;
+							gl.applyMatrix( source);	
+						
+						}-*/;
+						 
+						 public  native void applyMatrix(float n00, float n01, float n02, float n03,
+		                          float n10, float n11, float n12, float n13,
+		                          float n20, float n21, float n22, float n23,
+		                          float n30, float n31, float n32, float n33) /*-{
+							var gl = this.@processing.core.ProcessingJS::gl;
+							gl.applyMatrix( n00,  n01,  n02,  n03,
+		                           n10,  n11,  n12,  n13,
+		                           n20,  n21,  n22,  n23,
+		                           n30,  n31,  n32,  n33) ;	
+						
+						}-*/;
 						
 						public  native void printProjection() /*-{
 						console.log("printProjection: no implementado");
@@ -564,18 +578,33 @@ public class ProcessingJS implements PConstants{
 						
 						
 						
-
+						public native void pushMatrix() /*-{
+						var gl = this.@processing.core.ProcessingJS::gl;
+						gl.pushMatrix();	
+					
+					}-*/;
+					
+					public native void popMatrix() /*-{
+						var gl = this.@processing.core.ProcessingJS::gl;
+						gl.popMatrix();	
+				
+					}-*/;
 						
 						
 						public  native void pushProjection() /*-{
 						var gl = this.@processing.core.ProcessingJS::gl;
-						gl.pushProjection();	
-					
+						
+						gl.pushProjMatrix();
+						   
+
 					}-*/;
+					
+
+					
 
 						public  native void popProjection() /*-{
 						var gl = this.@processing.core.ProcessingJS::gl;
-						gl.popProjection();	
+						gl.popProjMatrix();	
 					
 					}-*/;
 
@@ -595,16 +624,22 @@ public class ProcessingJS implements PConstants{
 
 
 						public  native void setProjection(PMatrix3D pMatrix) /*-{
+							
+																		
+							
 						var obj = @processing.core.JsUtils::Matrix3D2JavaScriptArray(Lprocessing/core/PMatrix3D;)(pMatrix);
 							
 						var gl = this.@processing.core.ProcessingJS::gl;
 						
 						var pM = gl.getProjectionMatrix();
+
 						
+																
 						pM.set( obj[0], obj[1], obj[2], obj[3], 
 								obj[4], obj[5], obj[6], obj[7], 
 								obj[8], obj[9], obj[10], obj[11],
 								obj[12], obj[13], obj[14], obj[15]);
+
 					
 					}-*/;
 
@@ -668,6 +703,7 @@ public class ProcessingJS implements PConstants{
 
 					public native float strokeWeight() /*-{
 					var gl = this.@processing.core.ProcessingJS::gl;
+					//console.log(gl.strokeWeight());
 					return gl.getStrokeWeight();	
 				}-*/;
 
@@ -685,6 +721,8 @@ public class ProcessingJS implements PConstants{
 					var gl = this.@processing.core.ProcessingJS::gl;
 					return gl.alpha(fillColor);	
 					}-*/;
+					
+				
 
 
 }

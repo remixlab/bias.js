@@ -84,7 +84,6 @@ public class DOF1Event extends MotionEvent {
 	public DOF1Event(float x) {
 		super();
 		this.x = x;
-		this.button = B_NOBUTTON;
 	}
 
 	/**
@@ -97,31 +96,20 @@ public class DOF1Event extends MotionEvent {
 	public DOF1Event(DOF1Event prevEvent, float x) {
 		super();
 		this.x = x;
-		this.button = B_NOBUTTON;
 		setPreviousEvent(prevEvent);
 	}
 
 	protected DOF1Event(DOF1Event other) {
 		super(other);
-		this.x = new Float(other.x);
-		this.dx = new Float(other.dx);
+		this.x = other.x;
+		this.dx = other.dx;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see remixlab.bias.event.MotionEvent#get()
-	 */
 	@Override
 	public DOF1Event get() {
 		return new DOF1Event(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see remixlab.bias.event.MotionEvent#setPreviousEvent(remixlab.bias.event.MotionEvent)
-	 */
 	@Override
 	public void setPreviousEvent(MotionEvent prevEvent) {
 		if (prevEvent != null)
@@ -163,11 +151,6 @@ public class DOF1Event extends MotionEvent {
 		return x() - dx();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see remixlab.bias.event.MotionEvent#modulate(float[])
-	 */
 	@Override
 	public void modulate(float[] sens) {
 		if (sens != null)
@@ -175,11 +158,6 @@ public class DOF1Event extends MotionEvent {
 				x = x * sens[0];
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see remixlab.bias.event.BogusEvent#isNull()
-	 */
 	@Override
 	public boolean isNull() {
 		if (isRelative() && Util.zero(dx()))

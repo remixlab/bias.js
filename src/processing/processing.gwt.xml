@@ -3,4 +3,7 @@
 <module>
 	<inherits name="com.google.gwt.user.User" />
 	<source path="core"/>
+	<source path="eventjs"/>
+   	<inherits name="com.gwtent.reflection.Reflection" />
+   	<inherits name="remixlab.util" />  
 </module>
