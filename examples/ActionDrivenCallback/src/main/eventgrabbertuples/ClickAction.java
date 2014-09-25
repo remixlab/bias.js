@@ -8,7 +8,7 @@
  * which is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 
-package main.client;
+package main.eventgrabbertuples;
 
 
 import remixlab.bias.core.Action;
@@ -17,11 +17,11 @@ import remixlab.bias.core.Action;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Enum MotionAction.
+ * The Enum ClickAction.
  */
-public enum MotionAction implements Action<GlobalAction> {
-	  CHANGE_POSITION(GlobalAction.CHANGE_POSITION), 
-	  CHANGE_SHAPE(GlobalAction.CHANGE_SHAPE);
+public enum ClickAction implements Action<GlobalAction> {
+	  CHANGE_COLOR(GlobalAction.CHANGE_COLOR), 
+	  CHANGE_STROKE_WEIGHT(GlobalAction.CHANGE_STROKE_WEIGHT);
 
 	  @Override
 	  public GlobalAction referenceAction() {
@@ -30,17 +30,17 @@ public enum MotionAction implements Action<GlobalAction> {
 
 	  @Override
 	  public String description() {
-	    return "A simple motion action";
+	    return "A simple click action";
 	  }
 
 	  @Override
 	  public int dofs() {
-	    return 2;
+	    return 0;
 	  }
 
 	  GlobalAction act;
 
-	  MotionAction(GlobalAction a) {
+	  ClickAction(GlobalAction a) {
 	    act = a;
 	  }
 	}

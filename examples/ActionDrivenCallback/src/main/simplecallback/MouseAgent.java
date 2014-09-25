@@ -1,4 +1,4 @@
-package main.client;
+package main.simplecallback;
 
 import com.gwtent.reflection.client.Reflectable;
 
@@ -8,10 +8,10 @@ import remixlab.bias.core.InputHandler;
 import remixlab.bias.event.DOF2Event;
 
 @Reflectable
-public class SimpleMouseAgent extends Agent {
+public class MouseAgent extends Agent {
 	  DOF2Event event;
 
-	  public SimpleMouseAgent(InputHandler scn, String n) {
+	  public MouseAgent(InputHandler scn, String n) {
 	    super(scn, n);
 	  }
 

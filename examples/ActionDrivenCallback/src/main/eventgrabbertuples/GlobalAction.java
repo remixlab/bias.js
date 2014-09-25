@@ -1,4 +1,4 @@
-package main.client;
+package main.eventgrabbertuples;
 
 public enum GlobalAction {
   CHANGE_COLOR, 

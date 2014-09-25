@@ -8,7 +8,7 @@
  * which is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 
-package main.client;
+package main.eventgrabbertuples;
 
 import processing.core.PApplet;
 import processing.eventjs.JsEventHandler;
@@ -19,7 +19,7 @@ import remixlab.bias.core.InputHandler;
 /**
  * The Class ActionDrivenCallback.
  */
-public class ActionDrivenCallback {
+public class EventGrabberTuples {
 	
 	
 	/** The p. */
@@ -32,7 +32,7 @@ public class ActionDrivenCallback {
     int h = 600;
     
     /** The agent. */
-    SimpleMouseAgent agent;
+    MouseAgent agent;
     
     InputHandler inputHandler;
     Ellipse [] ellipses;
@@ -41,14 +41,14 @@ public class ActionDrivenCallback {
     /**
      * Instantiates a new action driven callback.
      */
-    public ActionDrivenCallback(){}
+    public EventGrabberTuples(){}
     
     /**
      * Instantiates a new action driven callback.
      *
      * @param p the p
      */
-    public ActionDrivenCallback(PApplet p){
+    public EventGrabberTuples(PApplet p){
     	this.p = p;
     	this.p.setJsEventHandler(new JsEventHandler());
     }
@@ -59,14 +59,10 @@ public class ActionDrivenCallback {
     public void setup() {
             p.size(w, h);
             inputHandler = new InputHandler();
-            agent = new SimpleMouseAgent(inputHandler, "my_mouse");
-            //1st choice above
-            
-            
-            
-            p.addMouseAgent ("mouseEvent", agent);
-            
             ellipses = new Ellipse[50];
+            agent = new MouseAgent(inputHandler, "my_mouse", ellipses);
+            p.addMouseAgent ("mouseEvent", agent);            
+            
             for (int i = 0; i < ellipses.length; i++)
               ellipses[i] = new Ellipse(agent,p);
     }

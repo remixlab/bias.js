@@ -11,7 +11,7 @@
     <!--                                                               -->
     <!-- Consider inlining CSS to reduce the number of requested files -->
     <!--                                                               -->
-    <link type="text/css" rel="stylesheet" href="ActionDrivenCallback.css">
+    <link type="text/css" rel="stylesheet" href="style.css">
 
     <!--                                           -->
     <!-- Any title is fine                         -->
@@ -23,7 +23,8 @@
     <!-- If you add any GWT meta tags, they must   -->
     <!-- be added before this line.                -->
     <!--                                           -->
-    <script type="text/javascript" language="javascript" src="actiondrivencallback/actiondrivencallback.nocache.js"></script>
+    <script type="text/javascript" language="javascript" src="examples/examples.nocache.js"></script>
+  
 	<script src="processing-1.4.8.js"></script>
 	<script language='javascript'>
 	  function gwtOnLoad() {		  			
@@ -41,32 +42,24 @@ function sketchProc(processing) {
 
 
 	
-	var  adc;
+	var  example;
 
 	processing.setup = function() {
 		
-		adc = new ActionDrivenCallback(this);
-		adc.setup();
+		//example = new ActionDrivenCallback(this);
+		//example = new SimpleCallback(this);
+		example = new EventGrabberTuples(this);
+		
+		
+		example.setup();
 	};
  
 	processing.draw = function() {
 	
-		adc.draw();
+		example.draw();
 	};
 	
-// 	processing.mouseMoved = function() {
-// 		adc.mouseMoved();
-// 	};	
-	
-// 	processing.mouseDragged = function() {
-// 		//console.log('hello');
-// 		adc.mouseDragged();
-// 	};
 
-// 	processing.mouseClicked = function() {
-// 		adc.mouseClicked();
-  
-// 	};	
   
 }
 
@@ -92,7 +85,7 @@ function sketchProc(processing) {
       </div>
     </noscript>
 
-    <h1>Action Driven Callback</h1>
+    <h1>Bias Examples</h1>
 	
 	<div style="text-align:center" >
 		<canvas id="processing-canvas" > </canvas> 

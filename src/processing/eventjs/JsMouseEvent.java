@@ -187,8 +187,8 @@ public class JsMouseEvent extends JsEvent {
 			setAction( JsMouseEvent.PRESS );
 		else if(getType().equals("mousemove") && isMousePressed)
 			setAction(  JsMouseEvent.DRAG );
-//		else if(getType().equals("mousemove")  && !isMousePressed)
-//			setAction(  JsMouseEvent.MOVE );	    
+		else if(getType().equals("mousemove")  && !isMousePressed)
+			setAction(  JsMouseEvent.MOVE );	    
 		else if(getType().equals("mouseover"))
 			setAction(  JsMouseEvent.ENTER );
 		else if(getType().equals("mouseout"))

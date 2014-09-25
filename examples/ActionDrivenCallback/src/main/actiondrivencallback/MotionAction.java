@@ -8,7 +8,7 @@
  * which is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 
-package main.client;
+package main.actiondrivencallback;
 
 
 import remixlab.bias.core.Action;
@@ -17,11 +17,11 @@ import remixlab.bias.core.Action;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Enum ClickAction.
+ * The Enum MotionAction.
  */
-public enum ClickAction implements Action<GlobalAction> {
-	  CHANGE_COLOR(GlobalAction.CHANGE_COLOR), 
-	  CHANGE_STROKE_WEIGHT(GlobalAction.CHANGE_STROKE_WEIGHT);
+public enum MotionAction implements Action<GlobalAction> {
+	  CHANGE_POSITION(GlobalAction.CHANGE_POSITION), 
+	  CHANGE_SHAPE(GlobalAction.CHANGE_SHAPE);
 
 	  @Override
 	  public GlobalAction referenceAction() {
@@ -30,17 +30,17 @@ public enum ClickAction implements Action<GlobalAction> {
 
 	  @Override
 	  public String description() {
-	    return "A simple click action";
+	    return "A simple motion action";
 	  }
 
 	  @Override
 	  public int dofs() {
-	    return 0;
+	    return 2;
 	  }
 
 	  GlobalAction act;
 
-	  ClickAction(GlobalAction a) {
+	  MotionAction(GlobalAction a) {
 	    act = a;
 	  }
 	}

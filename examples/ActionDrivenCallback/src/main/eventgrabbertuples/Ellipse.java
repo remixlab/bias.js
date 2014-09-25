@@ -1,4 +1,4 @@
-package main.client;
+package main.eventgrabbertuples;
 
 import processing.core.*;
 import remixlab.bias.core.*;
@@ -101,11 +101,6 @@ public class Ellipse extends GrabberObject {
 
 	  @Override
 	  public void performInteraction(BogusEvent event) {
-		  
-		    setColor();
-		    setPosition();
-		  
-		  /*
 	    if (((BogusEvent)event).action() != null) {
 	      switch ((GlobalAction) ((BogusEvent)event).action().referenceAction()) {
 	        case CHANGE_COLOR:
@@ -127,6 +122,6 @@ public class Ellipse extends GrabberObject {
 	        radiusY += ((DOF2Event)event).dy();
 	        break;
 	      }
-	    }*/
+	    }
 	  }
 	}
